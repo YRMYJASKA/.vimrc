@@ -1,0 +1,11 @@
+#!/bin/bash
+
+echo "Installing vundle into ~/.vim/bundle/Vundle.vim.."
+git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim
+
+echo "Making/over-riding .vimrc file..."
+cat ./.vimrc > ~/.vimrc
+
+echo "Done!"
+echo "Now launch vim. It will give you a couple of errors but run :PluginInstall and restart to install all plugins"
+echo "Feel free to remove this directory"
