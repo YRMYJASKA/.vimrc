@@ -114,11 +114,14 @@ let g:solarized_termcolors=256
 autocmd FileType c,cpp nnoremap ; :<C-u>ClangFormat<CR>
 let g:clang_format#auto_format = 0 " Set automatic formatting on saving 
 let g:clang_format#style_options = {
-						\"IndentWidth": 4,
+						\"BasedOnStyle": "LLVM",
+						\"IndentWidth": 8,
 						\"AlignTrailingComments": "true",
 						\"Standard": "C++11",
 						\"AlwaysBreakTemplateDeclarations": "true",
-						\"SortIncludes": "true"}
+						\"SortIncludes": "true", 
+						\"ColumnLimit": 1000,
+						\"UseTab": "Always"}
 
 " Colorscheme
 colo Tomorrow-Night-Eighties  
