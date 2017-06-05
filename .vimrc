@@ -17,8 +17,8 @@ set rtp+=~/.vim/bundle/Vundle.vim
 call vundle#begin()
 " Vundle for Vundle
 Plugin 'VundleVim/Vundle.vim'
-" Auto completion
-Plugin 'Valloric/YouCompleteMe'
+" Auto completion (To use YCM uncomment all of the settings including this one)
+" Plugin 'Valloric/YouCompleteMe'
 " More colors
 Plugin 'flazz/vim-colorschemes'
 " Syntax checking and a clear tree overview of a project
@@ -42,13 +42,13 @@ Plugin 'fisadev/vim-isort'
 Plugin 'rhysd/vim-clang-format'
 call vundle#end()
 " YouCompleteMe settings
-let g:ycm_collect_identifiers_from_tags_files = 1 " Let YCM read tags from Ctags file
-let g:ycm_seed_identifiers_with_syntax = 1 " Completion for programming language's keyword
-let g:ycm_complete_in_comments = 1 " Completion in comments
-let g:ycm_complete_in_strings = 1 " Completion in string
+"let g:ycm_collect_identifiers_from_tags_files = 1 " Let YCM read tags from Ctags file
+"let g:ycm_seed_identifiers_with_syntax = 1 " Completion for programming language's keyword
+"let g:ycm_complete_in_comments = 1 " Completion in comments
+"let g:ycm_complete_in_strings = 1 " Completion in string
 
 " Goto definition for YCM supported files
-map <F3> :YcmCompleter GoTo<CR>
+"map <F3> :YcmCompleter GoTo<CR>
 
 " Easy align settings
 xmap ga <Plug>(EasyAlign)
