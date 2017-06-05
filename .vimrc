@@ -15,26 +15,31 @@ set t_Co=256
 " Installing plugins via Vundle
 set rtp+=~/.vim/bundle/Vundle.vim
 call vundle#begin()
-
+" Vundle for Vundle
 Plugin 'VundleVim/Vundle.vim'
-
+" Auto completion
 Plugin 'Valloric/YouCompleteMe'
-
+" More colors
 Plugin 'flazz/vim-colorschemes'
-
+" Syntax checking and a clear tree overview of a project
 Plugin 'scrooloose/syntastic'
 Plugin 'scrooloose/NERDtree'
-
+" More colors :D
 Plugin 'altercation/vim-colors-solarized'
-
+" For making code more organized
 Plugin 'junegunn/vim-easy-align'
-
+" Easy file awitching
 Plugin 'ctrlpvim/ctrlp.vim'
-
+" Rust things
 Plugin 'rust-lang/rust.vim'
 Plugin 'racer-rust/vim-racer'
 Plugin 'cespare/vim-toml'
-
+" Auto pairing for ()'s []'s and {}'s and other things
+Plugin 'jiangmiao/auto-pairs'
+" Sorting python includes
+Plugin 'fisadev/vim-isort'
+" Auto-formatting because I'm lazy
+Plugin 'rhysd/vim-clang-format'
 call vundle#end()
 " YouCompleteMe settings
 let g:ycm_collect_identifiers_from_tags_files = 1 " Let YCM read tags from Ctags file
@@ -54,7 +59,10 @@ let g:syntastic_always_populate_loc_list = 1
 let g:syntastic_auto_loc_list = 1
 let g:syntastic_check_on_open = 1
 let g:syntastic_check_on_wq = 0
-
+" because of annoying warnings on PyQt5
+let g:syntastic_mode_map = {'passive_filetypes': ['python']}
+" Set the correct syntax checker for .asm files
+let g:syntastic_asm_checkers = ['nasm']
 " Formatting
 filetype plugin indent on
 syntax on
@@ -69,7 +77,8 @@ set noerrorbells
 set noswapfile
 set confirm
 set ai
-set mouse=a
+set binary
+"set mouse=a
 set cursorline
 set wildmenu
 
@@ -87,11 +96,12 @@ autocmd FileType c iabbrev fori for(int i = 0; i < ; i++){
 autocmd FileType c iabbrev forx for(int x = 0; x < ; x++){
 " Indenting blocks with tab in visual mode
 vmap <tab> >
-" More buttons for the commandline 
-nnoremap ; :
 
 " ctrlp
 let g:ctrlp_map = '<c-p>'
+
+" Assembly syntax
+au BufRead,BufNewFile *.asm set filetype=nasm
 
 " Moving around panes easily
 nnoremap <C-K> <C-W><C-K>
@@ -100,6 +110,15 @@ nnoremap <C-J> <C-W><C-J>
 nnoremap <C-H> <C-W><C-H>
 " Enable the use of solarized colors in vim
 let g:solarized_termcolors=256
+" Clang-format settings
+autocmd FileType c,cpp nnoremap ; :<C-u>ClangFormat<CR>
+let g:clang_format#auto_format = 0 " Set automatic formatting on saving 
+let g:clang_format#style_options = {
+						\"IndentWidth": 4,
+						\"AlignTrailingComments": "true",
+						\"Standard": "C++11",
+						\"AlwaysBreakTemplateDeclarations": "true",
+						\"SortIncludes": "true"}
+
 " Colorscheme
 colo Tomorrow-Night-Eighties  
-
