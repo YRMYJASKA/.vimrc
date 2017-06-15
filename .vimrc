@@ -17,8 +17,8 @@ set rtp+=~/.vim/bundle/Vundle.vim
 call vundle#begin()
 " Vundle for Vundle
 Plugin 'VundleVim/Vundle.vim'
-" Auto completion (To use YCM uncomment all of the settings including this one)
-" Plugin 'Valloric/YouCompleteMe'
+" Auto completion
+Plugin 'Valloric/YouCompleteMe'
 " More colors
 Plugin 'flazz/vim-colorschemes'
 " Syntax checking and a clear tree overview of a project
@@ -40,15 +40,21 @@ Plugin 'jiangmiao/auto-pairs'
 Plugin 'fisadev/vim-isort'
 " Auto-formatting because I'm lazy
 Plugin 'rhysd/vim-clang-format'
+" Better syntax highlighting hor c++
+Plugin 'octol/vim-cpp-enhanced-highlight'
 call vundle#end()
 " YouCompleteMe settings
-"let g:ycm_collect_identifiers_from_tags_files = 1 " Let YCM read tags from Ctags file
-"let g:ycm_seed_identifiers_with_syntax = 1 " Completion for programming language's keyword
-"let g:ycm_complete_in_comments = 1 " Completion in comments
-"let g:ycm_complete_in_strings = 1 " Completion in string
-
+let g:ycm_collect_identifiers_from_tags_files = 1 " Let YCM read tags from Ctags file
+let g:ycm_seed_identifiers_with_syntax = 1 " Completion for programming language's keyword
+let g:ycm_complete_in_comments = 1 " Completion in comments
+let g:ycm_complete_in_strings = 1 " Completion in string
+let g:ycm_min_num_of_chars_for_completion = 1
+let g:ycm_global_ycm_extra_conf = '~/.vim/bundle/YouCompleteMe/third_party/ycmd/cpp/ycm/.ycm_extra_conf.py'
+let g:ycm_show_diagnostics_ui = 1 " Disable ycm's diagnostics ui because it is annoying
+" YCM highlighting begone!
+let g:ycm_allow_changing_updatetime = 0
 " Goto definition for YCM supported files
-"map <F3> :YcmCompleter GoTo<CR>
+map <F3> :YcmCompleter GoTo<CR>
 
 " Easy align settings
 xmap ga <Plug>(EasyAlign)
@@ -59,10 +65,14 @@ let g:syntastic_always_populate_loc_list = 1
 let g:syntastic_auto_loc_list = 1
 let g:syntastic_check_on_open = 1
 let g:syntastic_check_on_wq = 0
-" because of annoying warnings on PyQt5
-let g:syntastic_mode_map = {'passive_filetypes': ['python']}
+
+" c++ compiler flags for syntastic
+" let g:Syntastic_cpp_compiler = "g++"
+" let g:Syntastic_cpp_compiler_options = "-stdlib=libc++ -std=c++11 -Wall -Wextra -Wpedantic"
+let g:syntastic_disabled_filetypes = ['cpp']
 " Set the correct syntax checker for .asm files
 let g:syntastic_asm_checkers = ['nasm']
+" let g:syntastic_cpp_include_dirs = ["~/Qt5.6.1/5.6/gcc_64/include/*"]
 " Formatting
 filetype plugin indent on
 syntax on
@@ -121,7 +131,8 @@ let g:clang_format#style_options = {
 						\"AlwaysBreakTemplateDeclarations": "true",
 						\"SortIncludes": "true", 
 						\"ColumnLimit": 1000,
-						\"UseTab": "Always"}
-
+						\"UseTab": "Always",
+						\"AccessModifierOffset": -8,
+						\"IndentCaseLabels": "false"}
 " Colorscheme
 colo Tomorrow-Night-Eighties  
