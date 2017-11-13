@@ -42,6 +42,10 @@ Plugin 'fisadev/vim-isort'
 Plugin 'rhysd/vim-clang-format'
 " Better syntax highlighting hor c++
 Plugin 'octol/vim-cpp-enhanced-highlight'
+" Indentation marks
+Plugin  'Yggdroot/indentLine'
+" HTML writing
+Plugin 'alvon/vim-closetag'
 call vundle#end()
 " YouCompleteMe settings
 let g:ycm_collect_identifiers_from_tags_files = 1 " Let YCM read tags from Ctags file
@@ -66,20 +70,26 @@ let g:syntastic_auto_loc_list = 1
 let g:syntastic_check_on_open = 1
 let g:syntastic_check_on_wq = 0
 
+let g:syntastic_python_checkers = ['flake8']
+
+let g:closetag_filenames = '*.html,*.xhtml,*phtml'
+
 " c++ compiler flags for syntastic
-" let g:Syntastic_cpp_compiler = "g++"
-" let g:Syntastic_cpp_compiler_options = "-stdlib=libc++ -std=c++11 -Wall -Wextra -Wpedantic"
+let g:Syntastic_cpp_compiler = "g++"
+let g:Syntastic_cpp_compiler_options = "-stdlib=libc++ -std=c++14 -Wall -Wextra -Wpedantic `pkg-config gtkmm-3.0 --cflags --libs`"
 let g:syntastic_disabled_filetypes = ['cpp']
 " Set the correct syntax checker for .asm files
 let g:syntastic_asm_checkers = ['nasm']
 " let g:syntastic_cpp_include_dirs = ["~/Qt5.6.1/5.6/gcc_64/include/*"]
+
 " Formatting
 filetype plugin indent on
 syntax on
 
 " Bleh.
 set tabstop=4
-set shiftwidth=8
+set expandtab
+set shiftwidth=4
 set ignorecase
 set smartcase
 set showmatch
@@ -124,15 +134,23 @@ let g:solarized_termcolors=256
 autocmd FileType c,cpp nnoremap ; :<C-u>ClangFormat<CR>
 let g:clang_format#auto_format = 0 " Set automatic formatting on saving 
 let g:clang_format#style_options = {
-						\"BasedOnStyle": "LLVM",
-						\"IndentWidth": 8,
+						\"BasedOnStyle": "WebKit",
+						\"IndentWidth": 4,
 						\"AlignTrailingComments": "true",
 						\"Standard": "C++11",
 						\"AlwaysBreakTemplateDeclarations": "true",
 						\"SortIncludes": "true", 
 						\"ColumnLimit": 1000,
-						\"UseTab": "Always",
+						\"UseTab": "Never",
 						\"AccessModifierOffset": -8,
 						\"IndentCaseLabels": "false"}
+
+" Indentation marks
+let g:indentLine_char = '┆'
+
+" To disable ycm diags
+let g:ycm_show_diagnostics_ui = 0
+let g:ycm_enable_diagnostic_signs = 0
+let g:ycm_enable_diagnostic_highlighting= 0
 " Colorscheme
 colo Tomorrow-Night-Eighties  
