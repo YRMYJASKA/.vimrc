@@ -45,7 +45,9 @@ Plugin 'octol/vim-cpp-enhanced-highlight'
 " Indentation marks
 Plugin  'Yggdroot/indentLine'
 " HTML writing
-Plugin 'alvon/vim-closetag'
+Plugin 'alvan/vim-closetag'
+"LaTeX writing
+Plugin 'lervag/vimtex'
 call vundle#end()
 " YouCompleteMe settings
 let g:ycm_collect_identifiers_from_tags_files = 1 " Let YCM read tags from Ctags file
@@ -59,6 +61,8 @@ let g:ycm_show_diagnostics_ui = 1 " Disable ycm's diagnostics ui because it is a
 let g:ycm_allow_changing_updatetime = 0
 " Goto definition for YCM supported files
 map <F3> :YcmCompleter GoTo<CR>
+
+set backspace=2
 
 " Easy align settings
 xmap ga <Plug>(EasyAlign)
@@ -119,6 +123,11 @@ vmap <tab> >
 
 " ctrlp
 let g:ctrlp_map = '<c-p>'
+let g:ctrlp_custom_ignore = {
+  \ 'dir':  '\v[\/]\.(git|hg|svn)$',
+  \ 'file': '\v\.(o|so|zip)$',
+  \ 'link': 'some_bad_symbolic_links',
+  \ }
 
 " Assembly syntax
 au BufRead,BufNewFile *.asm set filetype=nasm
@@ -144,5 +153,10 @@ let g:indentLine_char = '┆'
 let g:ycm_show_diagnostics_ui = 0
 let g:ycm_enable_diagnostic_signs = 0
 let g:ycm_enable_diagnostic_highlighting= 0
+
+" Config for LaTeX writing
+nmap <space>li <plug>(vimtex-info)
+let g:vimtex_view_method = 'mupdf'
+
 " Colorscheme
 colo Tomorrow-Night-Eighties  
