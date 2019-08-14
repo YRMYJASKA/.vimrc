@@ -2,11 +2,12 @@
 " By Jyry Hjelt
 " Essential
 set nocompatible
+set relativenumber
 set number
-filetype off
+filetype on
 
 " Setting up powerline statusline
-set rtp+=$HOME/.local/lib/python2.7/site-packages/powerline/bindings/vim/
+set rtp+=/usr/local/lib/python3.6/site-packages/powerline/bindings/vim/
 " Always show statusline
 set laststatus=2
 " Use 256 colours (Use this setting only if your terminal supports 256 colours)
@@ -46,16 +47,24 @@ Plugin 'octol/vim-cpp-enhanced-highlight'
 Plugin  'Yggdroot/indentLine'
 " HTML writing
 Plugin 'alvan/vim-closetag'
-"LaTeX writing
+" LaTeX writing
 Plugin 'lervag/vimtex'
+" Haskell
+Plugin 'neovimhaskell/haskell-vim'
+Plugin 'alx741/vim-hindent'
+" Vim note-taking
+Plugin 'vimwiki/vimwiki'
+Plugin 'plasticboy/vim-markdown'
 call vundle#end()
+
 " YouCompleteMe settings
 let g:ycm_collect_identifiers_from_tags_files = 1 " Let YCM read tags from Ctags file
 let g:ycm_seed_identifiers_with_syntax = 1 " Completion for programming language's keyword
 let g:ycm_complete_in_comments = 1 " Completion in comments
 let g:ycm_complete_in_strings = 1 " Completion in string
 let g:ycm_min_num_of_chars_for_completion = 1
-let g:ycm_global_ycm_extra_conf = '~/.vim/bundle/YouCompleteMe/third_party/ycmd/cpp/ycm/.ycm_extra_conf.py'
+let g:ycm_global_ycm_extra_conf = '~/.vim/.ycm_extra_conf.py'
+
 let g:ycm_show_diagnostics_ui = 1 " Disable ycm's diagnostics ui because it is annoying
 " YCM highlighting begone!
 let g:ycm_allow_changing_updatetime = 0
@@ -73,6 +82,15 @@ let g:syntastic_always_populate_loc_list = 1
 let g:syntastic_auto_loc_list = 1
 let g:syntastic_check_on_open = 1
 let g:syntastic_check_on_wq = 0
+let g:syntastic_c_checkers=['make']
+let g:syntastic_always_populate_loc_list = 1
+let g:syntastic_check_on_open=1
+let g:syntastic_enable_signs=1
+let g:syntastic_error_symbol = '✗'
+let g:syntastic_warning_symbol = '⚠'
+set statusline+=%#warningmsg#
+set statusline+=%{SyntasticStatuslineFlag()}
+set statusline+=%*gbar
 
 let g:syntastic_python_checkers = ['flake8']
 
@@ -157,6 +175,34 @@ let g:ycm_enable_diagnostic_highlighting= 0
 " Config for LaTeX writing
 nmap <space>li <plug>(vimtex-info)
 let g:vimtex_view_method = 'mupdf'
+let g:tex_flavor = 'latex'
+set cole=0
+let g:tex_conceal = ""
+
+" Spell checking
+autocmd FileType tex set spell spelllang=en_gb
+autocmd BufRead,BufNewFile *.md setlocal spell
+set complete+=kspell
+
+" Move cursor with display lines
+noremap  <buffer> <silent> k gk
+noremap  <buffer> <silent> j gj
+noremap  <buffer> <silent> 0 g0
+noremap  <buffer> <silent> $ g$
+
+set completeopt=longest,menuone,preview
+
+" common mistakes fixed
+cnoreabbrev E e
+cnoreabbrev Q q
+cnoreabbrev Qa qa
+cnoreabbrev W w
+
+" vimwiki config
+let g:vimwiki_list = [{'path': '~/Shared/ib_notes', 'syntax': 'markdown', 'ext': '.md'}]
+let g:vim_markdown_math = 1
+let g:indentLine_concealcursor = 'nc'
+set concealcursor-=n
 
 " Colorscheme
-colo Tomorrow-Night-Eighties  
+colo 1989 
