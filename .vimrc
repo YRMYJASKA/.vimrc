@@ -120,7 +120,7 @@ set noswapfile
 set confirm
 set ai
 set binary
-"set mouse=a
+set nofoldenable
 set cursorline
 set wildmenu
 
@@ -199,9 +199,15 @@ cnoreabbrev Qa qa
 cnoreabbrev W w
 
 " vimwiki config
-let g:vimwiki_list = [{'path': '~/Shared/ib_notes', 'syntax': 'markdown', 'ext': '.md'}]
+let g:vimwiki_list = [{'path': '~/Shared/JHNAI', 
+			\'syntax': 'markdown', 
+			\ 'ext': '.md',
+ 			\ 'template_path': '~/Shared/JHNAI/html_template',
+  			\ 'template_default': 'default',
+			\ 'custom_wiki2html': '~/Shared/JHNAI/customwiki2html.sh'}]
 let g:vim_markdown_math = 1
-let g:indentLine_concealcursor = 'nc'
+let g:indentLine_concealcursor = 'n'
+
 set concealcursor-=n
 
 " Colorscheme
